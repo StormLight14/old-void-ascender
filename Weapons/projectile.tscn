@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://crkgpr1ebxqv6"]
+
+[ext_resource type="Script" path="res://Weapons/projectile.gd" id="1_aj3fk"]
+[ext_resource type="Texture2D" uid="uid://ys4dl2qsump8" path="res://Assets/ranged_weapons/guns/default_projectile.png" id="1_oxy5e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vae7p"]
+size = Vector2(2, 2)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 2048
+collision_mask = 65537
+script = ExtResource("1_aj3fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_oxy5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vae7p")
+
+[node name="AutoDeleteTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="AutoDeleteTimer" to="." method="_on_auto_delete_timer_timeout"]

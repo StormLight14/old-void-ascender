@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WorldData" load_steps=3 format=3 uid="uid://b5kgaolblxg5g"]
+
+[ext_resource type="PackedScene" uid="uid://c3hdrgmotyrud" path="res://Worlds/world_one/w_1_lvl_0.tscn" id="1_cbb5y"]
+[ext_resource type="Script" path="res://world_data.gd" id="2_8xu1k"]
+
+[resource]
+script = ExtResource("2_8xu1k")
+id = "world_data"
+name = "World 1"
+levels = Array[PackedScene]([ExtResource("1_cbb5y")])

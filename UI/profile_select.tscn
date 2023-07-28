@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsqx1gog3sxh1"]
+
+[ext_resource type="Script" path="res://UI/profile_select.gd" id="1_upnvo"]
+
+[node name="ProfileSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_upnvo")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+text = "New Game"
+
+[node name="ProfileOneButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+disabled = true
+text = "Profile 1"
+
+[node name="ProfileTwoButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+disabled = true
+text = "Profile 2"
+
+[node name="ProfileThreeButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+disabled = true
+text = "Profile 3"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ProfileOneButton" to="." method="_on_profile_one_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ProfileTwoButton" to="." method="_on_profile_two_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ProfileThreeButton" to="." method="_on_profile_three_button_pressed"]
