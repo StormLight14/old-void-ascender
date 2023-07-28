@@ -1,4 +1,7 @@
-# void-ascender
+# Void Ascender
 Fast-paced platformer game being created in Godot 4.
 
-Feel free to make contributions to improve any bad code I've written!
+## About
+The player must get through each level by going upwards through it. They must complete the level before the void reaches them.
+
+Feel free to make contributions to improve any code I've written!
