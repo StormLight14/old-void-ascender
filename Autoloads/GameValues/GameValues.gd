@@ -66,7 +66,6 @@ func save_game_values():
 	game_data = ResourceLoader.load("user://saves/GameData.tres")
 	
 func save_profile(profile, player_data):
-	print(profile)
 	if profile:
 		print("Saving profile: " + str(profile))
 		var new_profile = Profile.new()

@@ -169,8 +169,8 @@ size = Vector2(8.48528, 22.6873)
 radius = 4.0
 height = 14.0
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 256
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 768
 script = ExtResource("1_dvbl3")
 player_stats = ExtResource("2_ygpc7")
 
@@ -184,7 +184,8 @@ libraries = {
 "": SubResource("AnimationLibrary_11785")
 }
 
-[node name="PlayerHurtbox" type="Area2D" parent="."]
+[node name="PlayerHurtbox" type="Area2D" parent="." groups=["player"]]
+visible = false
 collision_layer = 0
 collision_mask = 131078
 
@@ -282,6 +283,8 @@ one_shot = true
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="InvincibleFrameTimer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="Melee/MeleeAttackDelay" to="." method="_on_melee_attack_delay_timeout"]

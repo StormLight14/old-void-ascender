@@ -71,12 +71,12 @@ var weapons = {
 		2: {
 			'name': 'Shotgun',
 			'type': 'gun',
-			'shot_projectiles': 500,
-			'spread_degrees': 180,
+			'shot_projectiles': 5,
+			'spread_degrees': 10,
 			'ammo_count': 30,
 			'reload_time': 1,
-			'shot_delay': 0.1,
-			'projectile_speed': 100,
+			'shot_delay': 0.5,
+			'projectile_speed': 300,
 			'projectile_damage': 5.0, # per projectile
 			'projectile_knockback_strength': 30,
 			'auto_shoot': true,

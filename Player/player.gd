@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var wall_jump_timer = $WallJumpTimer
+@onready var invincible_frame_timer = $InvincibleFrameTimer
 
 @onready var controller_pivot = $ControllerPivot
 @onready var controller_cursor_sprite = %ControllerCursorSprite
@@ -26,6 +27,9 @@ var health = PlayerValues.health
 var melee_weapon = PlayerValues.melee_weapon
 var ranged_weapon = PlayerValues.ranged_weapon
 
+var knockback_vector = Vector2.ZERO
+
+
 @onready var mouse_position = get_viewport().get_mouse_position()
 
 var attack_hitbox_offset = Vector2(10, 0)
@@ -42,6 +46,7 @@ var player_start_pos = global_position
 var current_direction = "right"
 
 var just_wall_jumped = false
+var invincible = false
 var previous_wall_normal = Vector2.ZERO
 var air_jumps = 0 
 
@@ -368,8 +373,36 @@ func check_for_cursor_movement():
 		controller_cursor_sprite.visible = false
 	mouse_position = get_viewport().get_mouse_position()
 
+func attacked(damage, knockback_strength, attacker_position, attack_delay, attack_type):
+	if invincible == false and invincible_frame_timer.is_stopped() == true:
+		if attack_type == "melee":
+			if attack_delay > 0.05:
+				invincible_frame_timer.wait_time = attack_delay
+			else:
+				invincible_frame_timer.wait_time = 0.05
+			invincible_frame_timer.start()
+		
+		handle_knockback(knockback_strength, attacker_position)
+		
+		health -= damage
+		#progress_bar.visible = true
+		#progress_bar.value = health
+		
+		if health <= 0:
+			get_tree().change_scene_to_packed(GameValues.worlds[GameValues.current_world].levels[GameValues.current_level])
+			#progress_bar.value = health
+			
+func handle_knockback(knockback_strength, attacker_position):
+	if attacker_position < global_position:
+		knockback_vector = Vector2(1, 0) * knockback_strength
+	else:
+		knockback_vector = Vector2(-1, 0) * knockback_strength
+	
+	velocity.x = 0
+	velocity += knockback_vector
+
 func _on_hurtbox_area_entered(area):
-	global_position = player_start_pos
+	get_tree().change_scene_to_packed(GameValues.worlds[GameValues.current_world].levels[GameValues.current_level])
 
 
 func _on_melee_attack_delay_timeout():
@@ -384,5 +417,6 @@ func _on_ranged_attack_delay_timeout():
 
 
 func _on_melee_hitbox_body_entered(body):
-	body.attacked(melee_weapon['damage'] * PlayerValues.strength, melee_weapon['knockback_strength'], global_position, melee_weapon['attack_delay'], "melee")
+	if body.is_in_group("player") == false:
+		body.attacked(melee_weapon['damage'] * PlayerValues.strength, melee_weapon['knockback_strength'], global_position, melee_weapon['attack_delay'], "melee")
 

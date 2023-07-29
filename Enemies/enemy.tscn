@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3dagteaq1cih"]
+[gd_scene load_steps=8 format=3 uid="uid://d3dagteaq1cih"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_0ipwb"]
 [ext_resource type="Texture2D" uid="uid://droraasvj484w" path="res://Assets/enemies/placeholder_enemy.png" id="1_agbbu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3umf"]
+size = Vector2(15, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6jri"]
 size = Vector2(15, 40)
@@ -15,13 +18,22 @@ bg_color = Color(0.741176, 0.14902, 0.258824, 1)
 bg_color = Color(0, 0.666667, 0, 1)
 
 [node name="Enemy" type="CharacterBody2D" groups=["attackable"]]
+scale = Vector2(0.7, 0.7)
 collision_layer = 229376
 collision_mask = 49
 script = ExtResource("1_0ipwb")
 health = 500
-friction = 200.0
 max_speed = 100.0
-acceleration = 600.0
+acceleration = 850.0
+sight_range = 150
+
+[node name="EnemyHitbox" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+position = Vector2(7.5, -20)
+shape = SubResource("RectangleShape2D_p3umf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_agbbu")
@@ -45,13 +57,19 @@ max_value = 200.0
 allow_greater = true
 show_percentage = false
 
-[node name="InvincibleFrameTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="FallCheckLeft" type="RayCast2D" parent="."]
 target_position = Vector2(0, 4)
 
 [node name="FallCheckRight" type="RayCast2D" parent="."]
 position = Vector2(15, 0)
 target_position = Vector2(0, 4)
+
+[node name="InvincibleFrameTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="LeavePlayerTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_enemy_hitbox_body_entered"]

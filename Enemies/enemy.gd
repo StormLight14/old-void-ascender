@@ -7,9 +7,12 @@ enum {
 
 @export var health = 200
 @export var friction = 800.0
-@export var max_speed = 150.0
-@export var acceleration = 500.0
-@export var sight_range = 50.0
+@export var max_speed = 80.0
+@export var acceleration = 200.0
+@export var damage = 10
+@export var knockback_strength = 1000
+@export var attack_delay = 1
+@export var sight_range = -1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var invincible = false
@@ -24,6 +27,8 @@ var current_state = WANDERING
 
 @onready var fall_check_left = $FallCheckLeft
 @onready var fall_check_right = $FallCheckRight
+@onready var leave_player_timer = $LeavePlayerTimer
+
 
 
 func _ready():
@@ -75,20 +80,24 @@ func handle_friction(delta):
 
 func handle_movement(delta):		
 	if is_on_floor():
-		if global_position.distance_to(PlayerValues.position) <= sight_range:
-			current_state = CHASING
+		if leave_player_timer.is_stopped() == true:
+			if global_position.distance_to(PlayerValues.position) <= sight_range:
+				current_state = CHASING
 			
 		if fall_check_left.is_colliding() == false:
 			current_direction = "right"
 			
 			if PlayerValues.position.x < global_position.x:
 				current_state = WANDERING
+				leave_player_timer.start()
 				velocity.x = 0
+				
 		elif fall_check_right.is_colliding() == false:
 			current_direction = "left"
 			
 			if PlayerValues.position.x > global_position.x:
 				current_state = WANDERING
+				leave_player_timer.start()
 				velocity.x = 0
 
 		match current_state:
@@ -99,9 +108,7 @@ func handle_movement(delta):
 					velocity.x = move_toward(velocity.x, -max_speed, acceleration * delta)
 			CHASING:
 				velocity.x = move_toward(velocity.x, global_position.direction_to(PlayerValues.position).x * max_speed, acceleration * delta)
-		print(current_state)
-		print(over_ledge)
-		
-	
-		
-	
+
+
+func _on_enemy_hitbox_body_entered(body):
+	body.attacked(damage, 1, global_position, body.invincible_frame_timer.wait_time, "melee")
