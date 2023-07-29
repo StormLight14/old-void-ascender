@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 WeaponStats="*res://Autoloads/WeaponStats.gd"
 PlayerValues="*res://Autoloads/PlayerValues.gd"
 Worlds="*res://Autoloads/Worlds.tscn"
-GameValues="*res://Autoloads/GameValues.tscn"
+GameValues="*res://Autoloads/GameValues/GameValues.tscn"
 
 [display]
 

@@ -10,6 +10,7 @@ var special_weapons = WeaponStats.weapons[2]
 @export var strength = 1.0 # multiplier * damage of weapon
 
 @export var current_attack = "melee"
+@export var inventory = Inventory
 
 @export var melee_weapon: Dictionary = melee_weapons[1] # by melee weapon id, found in WeaponStats.gd
 @export var melee_weapon_sprite: CompressedTexture2D = melee_weapon['sprite']

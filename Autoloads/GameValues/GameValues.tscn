@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3cg4uwxkdyu3"]
 
-[ext_resource type="Script" path="res://Autoloads/GameValues.gd" id="1_1k4ik"]
+[ext_resource type="Script" path="res://Autoloads/GameValues/GameValues.gd" id="1_1k4ik"]
 [ext_resource type="Resource" uid="uid://brwwnjjrif5r1" path="res://Worlds/tutorial/world_tutorial_data.tres" id="2_f8qpb"]
 [ext_resource type="Resource" uid="uid://b5kgaolblxg5g" path="res://Worlds/world_one/world_one_data.tres" id="3_s0hax"]
 

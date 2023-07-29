@@ -57,7 +57,6 @@ func _physics_process(delta):
 	var input_direction = Input.get_axis("left", "right")
 	PlayerValues.position = global_position
 	
-	
 	handle_gravity(delta)
 	handle_wall_jump()
 	handle_jump(input_direction)
