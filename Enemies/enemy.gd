@@ -61,9 +61,7 @@ func attacked(damage, knockback_strength, attacker_position, attack_delay, attac
 		progress_bar.value = health
 		
 		if health <= 0:
-			print("died")
-			health = 200
-			progress_bar.value = health
+			queue_free()
 
 func handle_knockback(knockback_strength, attacker_position):
 	if attacker_position < global_position:
