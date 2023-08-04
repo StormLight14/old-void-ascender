@@ -8,6 +8,10 @@ extends Control
 @onready var armor_scroll = %ArmorScroll
 @onready var perks_scroll = %PerkScroll
 
+@onready var equipped_melee = %EquippedMelee
+@onready var equipped_ranged = %EquippedRanged
+@onready var equipped_special = %EquippedSpecial
+
 var inventory_slot_scene = preload("res://UI/inventory_slot.tscn")
 
 enum {
@@ -39,6 +43,10 @@ func update_inventory_ui():
 			armor_scroll.visible = true
 		PERKS:
 			perks_scroll.visible = true
+			
+	equipped_melee.texture = PlayerValues.melee_weapon_sprite
+	equipped_ranged.texture = PlayerValues.ranged_weapon_sprite
+	#equipped_special.texture = PlayerValues.special_weapon_sprite
 
 func _on_weapons_button_pressed():
 	current_tab = WEAPONS
