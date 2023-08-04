@@ -1,9 +1,9 @@
 #keeps track of all player values, persists between scenes
 extends Node
 
-var melee_weapons = WeaponStats.weapons[0]
-var ranged_weapons = WeaponStats.weapons[1]
-var special_weapons = WeaponStats.weapons[2]
+var melee_weapons = WeaponStats.weapons['melee']
+var ranged_weapons = WeaponStats.weapons['ranged']
+var special_weapons = WeaponStats.weapons['special']
 
 @export var position: Vector2
 @export var health = 50.0

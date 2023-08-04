@@ -7,6 +7,6 @@ var equipped_weapons = {
 	"special": 0,
 }
 
-var melee_weapons = [0] # by weapon's id
+var melee_weapons = [0] # [0, 1, 99, 100] by weapon's id
 var ranged_weapons = [0]
 var special_weapons = [0]

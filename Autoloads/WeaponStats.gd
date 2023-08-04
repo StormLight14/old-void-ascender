@@ -1,7 +1,7 @@
 extends Node
 
 var weapons = {
-	0: { # melee
+	'melee': { # melee
 		0: { # melee weapon id
 			'name': 'Stone Sword',
 			'size': 0, # 0: small, 1: medium, 2: large
@@ -39,7 +39,7 @@ var weapons = {
 			'sprite': preload("res://Assets/melee_weapons/dark_sword.png"),
 		}
 	},
-	1: { # ranged
+	'ranged': { # ranged
 		0: { # ranged weapon id
 			'name': 'Colt',
 			'type': 'gun',
@@ -84,7 +84,7 @@ var weapons = {
 			'sprite_scale': 0.4,
 		}
 	},
-	2: { # special
+	'special': { # special
 		
 	}
 }

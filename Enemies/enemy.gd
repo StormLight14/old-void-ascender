@@ -69,7 +69,6 @@ func handle_knockback(knockback_strength, attacker_position):
 	else:
 		knockback_vector = Vector2(-1, 0) * knockback_strength
 	
-	velocity.x = 0
 	velocity += knockback_vector
 	
 func handle_friction(delta):
