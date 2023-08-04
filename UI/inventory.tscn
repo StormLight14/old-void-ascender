@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dju1aiqwesm24"]
+[gd_scene load_steps=6 format=3 uid="uid://dju1aiqwesm24"]
 
 [ext_resource type="Script" path="res://UI/inventory.gd" id="1_s4wqq"]
 [ext_resource type="Texture2D" uid="uid://crck2ak7b8kdy" path="res://Assets/melee_weapons/steel_sword.png" id="2_1mro0"]
+[ext_resource type="PackedScene" uid="uid://brfj8yiutvkb4" path="res://UI/inventory_slot.tscn" id="2_14xjd"]
 [ext_resource type="Texture2D" uid="uid://b6g4egrhbhduy" path="res://Assets/ranged_weapons/guns/ar.png" id="3_ydprc"]
 [ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/ranged_weapons/guns/shotgun.png" id="4_7hxkv"]
 
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s4wqq")
+inventory_slot_scene = ExtResource("2_14xjd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
