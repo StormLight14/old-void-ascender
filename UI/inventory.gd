@@ -45,6 +45,9 @@ func _ready():
 		#inventory_slot.slot_item = WeaponStats.weapons['special'][special_weapon_id]
 		#armor.add_child(inventory_slot)
 
+func _process(_delta):
+	handle_controls()
+
 func update_inventory_ui():
 	weapon_scroll.visible = false
 	armor_scroll.visible = false
@@ -68,6 +71,11 @@ func update_inventory_ui():
 	equipped_melee.texture = PlayerValues.melee_weapon['sprite']
 	equipped_ranged.texture = PlayerValues.ranged_weapon['sprite']
 	#equipped_special.texture =  PlayerValues.special_weapon['sprite']
+	
+func handle_controls():
+	if Input.is_action_just_pressed("ui_close"):
+		get_tree().paused = false
+		queue_free()
 	
 func set_equipped_display_visible(type):
 	equipped_melee.visible = false

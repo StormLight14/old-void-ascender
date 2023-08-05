@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/ranged_weapons/guns/shotgun.png" id="4_7hxkv"]
 
 [node name="Inventory" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

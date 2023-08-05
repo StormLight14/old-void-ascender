@@ -24,8 +24,6 @@ extends CharacterBody2D
 @export var player_stats = PlayerStats
 
 var health = PlayerValues.health
-var melee_weapon = PlayerValues.melee_weapon
-var ranged_weapon = PlayerValues.ranged_weapon
 
 var knockback_vector = Vector2.ZERO
 
@@ -68,6 +66,7 @@ func _physics_process(delta):
 	
 	handle_controller_cursor(delta)
 	handle_attacks()
+	handle_ui_controls()
 	
 	handle_movement(input_direction, delta)
 	handle_friction(input_direction, delta)
@@ -75,26 +74,19 @@ func _physics_process(delta):
 	
 	if current_attack == MELEE:
 		if Input.is_key_pressed(KEY_H):
-			melee_weapon = PlayerValues.melee_weapons[1]
-			PlayerValues.melee_weapon = melee_weapon
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons[1]
 		if Input.is_key_pressed(KEY_J):
-			melee_weapon = PlayerValues.melee_weapons[99]
-			PlayerValues.melee_weapon = melee_weapon
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons[99]
 		if Input.is_key_pressed(KEY_K):
-			melee_weapon = PlayerValues.melee_weapons[100]
-			PlayerValues.melee_weapon = melee_weapon
-		PlayerValues.melee_weapon = melee_weapon
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons[100]
 		
 	if current_attack == RANGED:
 		if Input.is_key_pressed(KEY_H):
-			ranged_weapon = PlayerValues.ranged_weapons[0]
-			PlayerValues.ranged_weapon = ranged_weapon
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[0]
 		if Input.is_key_pressed(KEY_J):
-			ranged_weapon = PlayerValues.ranged_weapons[1]
-			PlayerValues.ranged_weapon = ranged_weapon
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[1]
 		if Input.is_key_pressed(KEY_K):
-			ranged_weapon = PlayerValues.ranged_weapons[2]
-			PlayerValues.ranged_weapon = ranged_weapon
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[2]
 			
 
 	var was_on_floor = is_on_floor()
@@ -141,9 +133,18 @@ func handle_jump(input_direction):
 			velocity.y = player_stats.jump_velocity
 			coyote_jump_timer.stop()
 		elif air_jumps >= 1 and not is_on_floor() and not just_wall_jumped:
-				velocity.y = player_stats.jump_velocity
-				velocity.x = input_direction * player_stats.max_speed * 1.25
-				air_jumps -= 1
+			velocity.y = player_stats.jump_velocity
+			velocity.x = input_direction * player_stats.max_speed * 1.25
+			air_jumps -= 1
+
+func handle_ui_controls():
+	if Input.is_action_just_pressed("open_inventory"):
+		var canvas_layer = CanvasLayer.new()
+		get_node("/root/").add_child(canvas_layer)
+		
+		var inventory = preload("res://UI/inventory.tscn")
+		canvas_layer.add_child(inventory.instantiate())
+		get_tree().paused = true
 
 func handle_movement(input_direction, delta):
 	if input_direction != 0 and is_on_floor():
@@ -160,7 +161,7 @@ func handle_air_resistance(input_direction, delta):
 		velocity.x = move_toward(velocity.x, 0, player_stats.air_resistance * delta)
 		
 func handle_animation(input_direction):
-	ranged_sprite.scale = Vector2(ranged_weapon['sprite_scale'], ranged_weapon['sprite_scale'])
+	ranged_sprite.scale = Vector2(PlayerValues.ranged_weapon['sprite_scale'], PlayerValues.ranged_weapon['sprite_scale'])
 	if GameValues.using_controller == false:
 		ranged.look_at(get_global_mouse_position())
 	else:
@@ -260,32 +261,32 @@ func attack_melee():
 	
 	#set_melee_collision()
 	
-	melee_attack_delay.wait_time = melee_weapon['attack_delay']
+	melee_attack_delay.wait_time = PlayerValues.melee_weapon['attack_delay']
 	
 	if melee_attack_delay.is_stopped() == true:
 		melee_sprite.visible = true
 		melee_attack_delay.start()
 		
-		if melee_weapon['size'] == 0:
+		if PlayerValues.melee_weapon['size'] == 0:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(0.6, 0.6)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.3, 0.3)
 			%SmallMelee.disabled = false
-		elif melee_weapon['size'] == 1:
+		elif PlayerValues.melee_weapon['size'] == 1:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(0.8, 0.8)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.4, 0.4)
 			%MediumMelee.disabled = false
-		elif melee_weapon['size'] == 2:
+		elif PlayerValues.melee_weapon['size'] == 2:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(1.0, 1.0)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.5, 0.5)
 			%LargeMelee.disabled = false
 			
-		animation_player.speed_scale = 1 + 1/melee_weapon['attack_delay'] # Original animation time 1 sec
+		animation_player.speed_scale = 1 + 1/PlayerValues.melee_weapon['attack_delay'] # Original animation time 1 sec
 		if current_direction == "right":
 			animation_player.play("melee_attack_right")
 		else:
@@ -298,27 +299,27 @@ func attack_ranged():
 	%LargeMelee.disabled = true
 	melee_sprite.visible = false
 	
-	ranged_sprite.texture = ranged_weapon['sprite']
+	ranged_sprite.texture = PlayerValues.ranged_weapon['sprite']
 	ranged_sprite.scale = Vector2(0.5, 0.5)
 	ranged_sprite.visible = true
-	ranged_attack_delay.wait_time = ranged_weapon['shot_delay']
+	ranged_attack_delay.wait_time = PlayerValues.ranged_weapon['shot_delay']
 	
 	if ranged_attack_delay.is_stopped() == true:
-		if ranged_weapon['shot_projectiles'] == 1:
+		if PlayerValues.ranged_weapon['shot_projectiles'] == 1:
 			var projectile = preload("res://Weapons/projectile.tscn").instantiate()
 			projectile.global_position = %ProjectileSpawnLocation.global_position
 			projectile.rotation = ranged.rotation
-			projectile.speed = ranged_weapon['projectile_speed']
+			projectile.speed = PlayerValues.ranged_weapon['projectile_speed']
 			projectile.start_pos = global_position
 			
 			owner.add_child(projectile)
 		else:
-			var spread_degrees = ranged_weapon['spread_degrees']
-			for i in range(ranged_weapon['shot_projectiles']):
+			var spread_degrees = PlayerValues.ranged_weapon['spread_degrees']
+			for i in range(PlayerValues.ranged_weapon['shot_projectiles']):
 				var projectile = preload("res://Weapons/projectile.tscn").instantiate()
 				projectile.global_position = %ProjectileSpawnLocation.global_position
 				projectile.rotation_degrees = ranged.rotation_degrees + randf_range(-spread_degrees, spread_degrees)
-				projectile.speed = ranged_weapon['projectile_speed']
+				projectile.speed = PlayerValues.ranged_weapon['projectile_speed']
 				projectile.start_pos = global_position
 				
 				owner.add_child(projectile)
@@ -418,5 +419,5 @@ func _on_ranged_attack_delay_timeout():
 
 func _on_melee_hitbox_body_entered(body):
 	if body.is_in_group("player") == false:
-		body.attacked(melee_weapon['damage'] * PlayerValues.strength, melee_weapon['knockback_strength'], global_position, melee_weapon['attack_delay'], "melee")
+		body.attacked(PlayerValues.melee_weapon['damage'] * PlayerValues.strength, PlayerValues.melee_weapon['knockback_strength'], global_position, PlayerValues.melee_weapon['attack_delay'], "melee")
 
