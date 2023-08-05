@@ -1,10 +1,13 @@
 extends Control
 
-@onready var weapons = %Weapons
+@onready var melee_weapons = %MeleeWeapons
+@onready var ranged_weapons = %RangedWeapons
+@onready var special_weapons = %SpecialWeapons
+ 
 @onready var armor = %Armor
 @onready var perks = %Perks
 
-@onready var weapons_scroll = %WeaponScroll
+@onready var weapon_scroll = %WeaponScroll
 @onready var armor_scroll = %ArmorScroll
 @onready var perks_scroll = %PerkScroll
 
@@ -24,39 +27,26 @@ var current_tab = WEAPONS
 
 func _ready():
 	update_inventory_ui()
-	for i in range(10):
+	for melee_weapon_id in PlayerValues.inventory.melee_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
 		inventory_slot.slot_item_type = 'melee'
-		inventory_slot.slot_item = WeaponStats.weapons['melee'][0]
-		weapons.add_child(inventory_slot)
-	for i in range(10):
-		var inventory_slot = inventory_slot_scene.instantiate()
-		inventory_slot.slot_item_type = 'melee'
-		inventory_slot.slot_item = WeaponStats.weapons['melee'][1]
-		weapons.add_child(inventory_slot)
-	for i in range(10):
+		inventory_slot.slot_item = WeaponStats.weapons['melee'][melee_weapon_id]
+		melee_weapons.add_child(inventory_slot)
+
+	for ranged_weapon_id in PlayerValues.inventory.ranged_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
 		inventory_slot.slot_item_type = 'ranged'
-		inventory_slot.slot_item = WeaponStats.weapons['ranged'][1]
-		weapons.add_child(inventory_slot)
-	for i in range(10):
-		var inventory_slot = inventory_slot_scene.instantiate()
-		inventory_slot.slot_item_type = 'ranged'
-		inventory_slot.slot_item = WeaponStats.weapons['ranged'][2]
-		weapons.add_child(inventory_slot)
-	for i in range(10):
-		var inventory_slot = inventory_slot_scene.instantiate()
-		inventory_slot.slot_item_type = 'ranged'
-		inventory_slot.slot_item = WeaponStats.weapons['ranged'][1]
-		armor.add_child(inventory_slot)
+		inventory_slot.slot_item = WeaponStats.weapons['ranged'][ranged_weapon_id]
+		ranged_weapons.add_child(inventory_slot)
 		
-	#for i in range(20):
+	#for special_weapon_id in PlayerValues.inventory.special_weapons:
 		#var inventory_slot = inventory_slot_scene.instantiate()
 		#inventory_slot.slot_item_type = 'special'
-		#perks.add_child(inventory_slot)
+		#inventory_slot.slot_item = WeaponStats.weapons['special'][special_weapon_id]
+		#armor.add_child(inventory_slot)
 
 func update_inventory_ui():
-	weapons_scroll.visible = false
+	weapon_scroll.visible = false
 	armor_scroll.visible = false
 	perks_scroll.visible = false
 	
@@ -66,7 +56,7 @@ func update_inventory_ui():
 	
 	match current_tab:
 		WEAPONS:
-			weapons_scroll.visible = true
+			weapon_scroll.visible = true
 			set_equipped_display_visible('weapons')
 		ARMOR:
 			armor_scroll.visible = true

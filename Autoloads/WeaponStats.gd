@@ -20,6 +20,15 @@ var weapons = {
 			'knockback_strength': 50,
 			'sprite': preload("res://Assets/melee_weapons/steel_sword.png"),
 		},
+		98: {
+			'name': 'Vampire Sword',
+			'size': 0,
+			'damage': 25.0,
+			'attack_delay': 0.1,
+			'auto_swing': true,
+			'knockback_strength': 60,
+			'sprite': preload("res://Assets/melee_weapons/vampire_sword.png"),
+		},
 		99: {
 			'name': 'Ice Sword',
 			'size': 1,
