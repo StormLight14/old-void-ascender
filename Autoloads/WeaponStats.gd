@@ -2,7 +2,7 @@ extends Node
 
 var weapons = {
 	'melee': { # melee
-		0: { # melee weapon id
+		'stone_sword': { # melee weapon id
 			'name': 'Stone Sword',
 			'size': 0, # 0: small, 1: medium, 2: large
 			'damage': 5.0,
@@ -11,7 +11,7 @@ var weapons = {
 			'knockback_strength': 50,
 			'sprite': preload("res://Assets/melee_weapons/stone_sword.png"),
 		},
-		1: {
+		'steel_sword': {
 			'name': 'Steel Sword',
 			'size': 0,
 			'damage': 7.5,
@@ -20,7 +20,7 @@ var weapons = {
 			'knockback_strength': 50,
 			'sprite': preload("res://Assets/melee_weapons/steel_sword.png"),
 		},
-		98: {
+		'vampire_sword': {
 			'name': 'Vampire Sword',
 			'size': 0,
 			'damage': 25.0,
@@ -29,7 +29,7 @@ var weapons = {
 			'knockback_strength': 60,
 			'sprite': preload("res://Assets/melee_weapons/vampire_sword.png"),
 		},
-		99: {
+		'ice_sword': {
 			'name': 'Ice Sword',
 			'size': 1,
 			'damage': 50.0,
@@ -38,7 +38,7 @@ var weapons = {
 			'knockback_strength': 60,
 			'sprite': preload("res://Assets/melee_weapons/ice_sword.png"),
 		},
-		100: {
+		'dark_sword': {
 			'name': 'Dark Sword',
 			'size': 2,
 			'damage': 100.0,
@@ -49,7 +49,7 @@ var weapons = {
 		}
 	},
 	'ranged': { # ranged
-		0: { # ranged weapon id
+		'colt': { # ranged weapon id
 			'name': 'Colt',
 			'type': 'gun',
 			'shot_projectiles': 1,
@@ -63,7 +63,7 @@ var weapons = {
 			'sprite': preload("res://Assets/ranged_weapons/guns/colt.png"),
 			'sprite_scale': 0.3,
 		},
-		1: {
+		'ar': {
 			'name': 'AR',
 			'type': 'gun',
 			'shot_projectiles': 1,
@@ -77,7 +77,7 @@ var weapons = {
 			'sprite': preload("res://Assets/ranged_weapons/guns/ar.png"),
 			'sprite_scale': 0.4,
 		},
-		2: {
+		'shotgun': {
 			'name': 'Shotgun',
 			'type': 'gun',
 			'shot_projectiles': 5,
@@ -87,13 +87,21 @@ var weapons = {
 			'shot_delay': 0.5,
 			'projectile_speed': 300,
 			'projectile_damage': 5.0, # per projectile
-			'projectile_knockback_strength': 30,
+			'projectile_knockback_strength': 100,
 			'auto_shoot': true,
 			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
 			'sprite_scale': 0.4,
 		}
 	},
 	'special': { # special
-		
+		'flamethrower': {
+			'name': 'Flamethrower',
+			'base_damage': 5.0,
+			'damage_increment': 5.0,
+			'max_damage': 50.0,
+			'auto_attack': true,
+			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
+			'sprite_scale': 0.4,
+		}
 	}
 }

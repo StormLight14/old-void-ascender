@@ -265,6 +265,7 @@ position = Vector2(15, 0)
 
 [node name="ControllerCursorSprite" type="Sprite2D" parent="ControllerPivot/ControllerCursor"]
 unique_name_in_owner = true
+visible = false
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_82nw3")
 
@@ -285,6 +286,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="InvincibleFrameTimer" type="Timer" parent="."]
+
+[node name="OpenUITimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="Melee/MeleeAttackDelay" to="." method="_on_melee_attack_delay_timeout"]

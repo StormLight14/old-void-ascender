@@ -3,6 +3,6 @@ class_name Inventory
 
 @export var test = "test"
 
-@export var melee_weapons = [0, 1, 98, 99, 100] # [0, 1, 99, 100] by weapon's id
-@export var ranged_weapons = [0, 1, 2]
-@export var special_weapons = [0]
+@export var melee_weapons = ['stone_sword', 'steel_sword', 'vampire_sword', 'ice_sword', 'dark_sword']
+@export var ranged_weapons = ['colt', 'ar', 'shotgun']
+@export var special_weapons = ['flamethrower']

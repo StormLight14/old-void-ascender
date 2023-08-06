@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxfn4h2qlmbgj"]
+[gd_scene load_steps=4 format=3 uid="uid://dxfn4h2qlmbgj"]
 
-[ext_resource type="Texture2D" uid="uid://xle8ix5h7mtx" path="res://Assets/particles/particle-test.png" id="1_xqrio"]
+[ext_resource type="Texture2D" uid="uid://xle8ix5h7mtx" path="res://Assets/particles/flamethrower-particle.png" id="1_er3ir"]
+[ext_resource type="Script" path="res://Weapons/projectiles/fire_particles.gd" id="2_m8abr"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivv2w"]
 lifetime_randomness = 0.05
@@ -21,12 +22,14 @@ hue_variation_max = 0.02
 [node name="FireParticles" type="GPUParticles2D"]
 amount = 250
 process_material = SubResource("ParticleProcessMaterial_ivv2w")
-texture = ExtResource("1_xqrio")
+texture = ExtResource("1_er3ir")
 lifetime = 1.2
+script = ExtResource("2_m8abr")
 
 [node name="FlameParticleArea" type="Area2D" parent="."]
 collision_layer = 1024
 collision_mask = 65536
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlameParticleArea"]
+visible = false
 polygon = PackedVector2Array(0, 0, -13, -40, -13, -50, -8, -54, 8, -54, 14, -50, 14, -40)

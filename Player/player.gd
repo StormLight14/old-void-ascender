@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var wall_jump_timer = $WallJumpTimer
 @onready var invincible_frame_timer = $InvincibleFrameTimer
+@onready var open_ui_timer = $OpenUITimer
+
 
 @onready var controller_pivot = $ControllerPivot
 @onready var controller_cursor_sprite = %ControllerCursorSprite
@@ -138,7 +140,8 @@ func handle_jump(input_direction):
 			air_jumps -= 1
 
 func handle_ui_controls():
-	if Input.is_action_just_pressed("open_inventory"):
+	if Input.is_action_pressed("open_inventory") and open_ui_timer.is_stopped():
+		open_ui_timer.start()
 		var canvas_layer = CanvasLayer.new()
 		get_node("/root/").add_child(canvas_layer)
 		
@@ -328,7 +331,8 @@ func attack_ranged():
 				
 	
 func attack_special():
-	pass
+	if PlayerValues.special_weapon == PlayerValues.special_weapons['flamethrower']:
+		print("Use flamethrower")
 	
 func handle_controller_cursor(delta):
 	var direction = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))

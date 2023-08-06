@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xle8ix5h7mtx"
-path="res://.godot/imported/particle-test.png-0c5a9786764e7980363da1d8b449c259.ctex"
+path="res://.godot/imported/flamethrower-particle.png-648f59287514714ee53c509e3729c92d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/particles/particle-test.png"
-dest_files=["res://.godot/imported/particle-test.png-0c5a9786764e7980363da1d8b449c259.ctex"]
+source_file="res://Assets/particles/flamethrower-particle.png"
+dest_files=["res://.godot/imported/flamethrower-particle.png-648f59287514714ee53c509e3729c92d.ctex"]
 
 [params]
 
