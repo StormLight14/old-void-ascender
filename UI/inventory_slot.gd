@@ -3,7 +3,7 @@ extends TextureRect
 @onready var item_texture_button = %ItemTextureButton
 
 var follow_mouse = false
-var slot_item = WeaponStats.weapons['ranged'][0]
+var slot_item = WeaponStats.weapons['ranged']['ar']
 var slot_item_type = 'ranged' # melee, ranged, special, empty
 
 func _ready():

@@ -15,7 +15,6 @@ orbit_velocity_max = 0.0
 radial_accel_max = 10.0
 hue_variation_min = -0.02
 hue_variation_max = 0.02
-turbulence_enabled = true
 turbulence_noise_strength = 9.9
 turbulence_noise_scale = 10.0
 turbulence_noise_speed_random = 1.03
