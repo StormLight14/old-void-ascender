@@ -86,8 +86,8 @@ var weapons = {
 			'reload_time': 1,
 			'shot_delay': 0.5,
 			'projectile_speed': 300,
-			'projectile_damage': 5.0, # per projectile
-			'projectile_knockback_strength': 100,
+			'projectile_damage': 10.0, # per projectile
+			'projectile_knockback_strength': 50,
 			'auto_shoot': true,
 			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
 			'sprite_scale': 0.4,

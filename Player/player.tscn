@@ -288,7 +288,7 @@ one_shot = true
 [node name="InvincibleFrameTimer" type="Timer" parent="."]
 
 [node name="OpenUITimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_hurtbox_area_entered"]

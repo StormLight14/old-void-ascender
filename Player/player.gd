@@ -76,19 +76,19 @@ func _physics_process(delta):
 	
 	if current_attack == MELEE:
 		if Input.is_key_pressed(KEY_H):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons[1]
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons['steel_sword']
 		if Input.is_key_pressed(KEY_J):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons[99]
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons['ice_sword']
 		if Input.is_key_pressed(KEY_K):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons[100]
+			PlayerValues.melee_weapon = PlayerValues.melee_weapons['vampire_sword']
 		
 	if current_attack == RANGED:
 		if Input.is_key_pressed(KEY_H):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[0]
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['colt']
 		if Input.is_key_pressed(KEY_J):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[1]
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['shotgun']
 		if Input.is_key_pressed(KEY_K):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons[2]
+			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['ar']
 			
 
 	var was_on_floor = is_on_floor()
@@ -140,8 +140,8 @@ func handle_jump(input_direction):
 			air_jumps -= 1
 
 func handle_ui_controls():
+	print(open_ui_timer.time_left)
 	if Input.is_action_pressed("open_inventory") and open_ui_timer.is_stopped():
-		open_ui_timer.start()
 		var canvas_layer = CanvasLayer.new()
 		get_node("/root/").add_child(canvas_layer)
 		
