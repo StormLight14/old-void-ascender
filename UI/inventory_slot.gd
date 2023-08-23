@@ -4,7 +4,7 @@ extends TextureRect
 
 var follow_mouse = false
 var slot_item = WeaponStats.weapons['ranged']['ar']
-var slot_item_type = 'ranged' # melee, ranged, special, empty
+var slot_item_type = PlayerValues.RANGED # melee, ranged, special, empty
 
 func _ready():
 	if slot_item:
@@ -20,10 +20,13 @@ func _on_item_texture_button_pressed():
 	match slot_item_type:
 		'melee':
 			PlayerValues.melee_weapon = slot_item
+			PlayerValues.current_attack = PlayerValues.MELEE
 		'ranged':
 			PlayerValues.ranged_weapon = slot_item
+			PlayerValues.current_attack = PlayerValues.RANGED
 		'special':
 			PlayerValues.special_weapon = slot_item
+			PlayerValues.current_attack = PlayerValues.SPECIAL
 		'empty':
 			return
 	

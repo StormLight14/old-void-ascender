@@ -39,11 +39,11 @@ func _ready():
 		inventory_slot.slot_item = WeaponStats.weapons['ranged'][ranged_weapon_id]
 		ranged_weapons.add_child(inventory_slot)
 		
-	#for special_weapon_id in PlayerValues.inventory.special_weapons:
-		#var inventory_slot = inventory_slot_scene.instantiate()
-		#inventory_slot.slot_item_type = 'special'
-		#inventory_slot.slot_item = WeaponStats.weapons['special'][special_weapon_id]
-		#armor.add_child(inventory_slot)
+	for special_weapon_id in PlayerValues.inventory.special_weapons:
+		var inventory_slot = inventory_slot_scene.instantiate()
+		inventory_slot.slot_item_type = 'special'
+		inventory_slot.slot_item = WeaponStats.weapons['special'][special_weapon_id]
+		special_weapons.add_child(inventory_slot)
 
 func _process(_delta):
 	handle_controls()

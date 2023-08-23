@@ -13,32 +13,28 @@ extends CharacterBody2D
 @onready var controller_cursor_sprite = %ControllerCursorSprite
 @onready var controller_cursor = %ControllerCursor
 
+@onready var attack_delay = %AttackDelay
 
 @onready var melee = %Melee
 @onready var melee_hitbox = %MeleeHitbox
 @onready var melee_sprite = %MeleeSprite
-@onready var melee_attack_delay = %MeleeAttackDelay
 
 @onready var ranged = %Ranged
 @onready var ranged_sprite = %RangedSprite
-@onready var ranged_attack_delay = $Ranged/RangedAttackDelay
+
+@onready var special = %Special
+@onready var special_sprite = %SpecialSprite
+@onready var special_projectile_spawn_location = %SpecialProjectileSpawnLocation
+
 
 @export var player_stats = PlayerStats
 
 var health = PlayerValues.health
-
 var knockback_vector = Vector2.ZERO
-
 
 @onready var mouse_position = get_viewport().get_mouse_position()
 
 var attack_hitbox_offset = Vector2(10, 0)
-
-enum {
-	MELEE,
-	RANGED,
-	SPECIAL
-}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -50,12 +46,11 @@ var invincible = false
 var previous_wall_normal = Vector2.ZERO
 var air_jumps = 0 
 
-var current_attack = MELEE
-
 func _ready():
 	randomize()
 	melee_sprite.visible = false
 	ranged_sprite.visible = false
+	special_sprite.visible = false
 	air_jumps = player_stats.air_jumps
 
 func _physics_process(delta):
@@ -74,7 +69,7 @@ func _physics_process(delta):
 	handle_friction(input_direction, delta)
 	handle_air_resistance(input_direction, delta)
 	
-	if current_attack == MELEE:
+	if PlayerValues.current_attack == PlayerValues.MELEE:
 		if Input.is_key_pressed(KEY_H):
 			PlayerValues.melee_weapon = PlayerValues.melee_weapons['steel_sword']
 		if Input.is_key_pressed(KEY_J):
@@ -82,7 +77,7 @@ func _physics_process(delta):
 		if Input.is_key_pressed(KEY_K):
 			PlayerValues.melee_weapon = PlayerValues.melee_weapons['vampire_sword']
 		
-	if current_attack == RANGED:
+	if PlayerValues.current_attack == PlayerValues.RANGED:
 		if Input.is_key_pressed(KEY_H):
 			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['colt']
 		if Input.is_key_pressed(KEY_J):
@@ -140,7 +135,6 @@ func handle_jump(input_direction):
 			air_jumps -= 1
 
 func handle_ui_controls():
-	print(open_ui_timer.time_left)
 	if Input.is_action_pressed("open_inventory") and open_ui_timer.is_stopped():
 		var canvas_layer = CanvasLayer.new()
 		get_node("/root/").add_child(canvas_layer)
@@ -165,21 +159,29 @@ func handle_air_resistance(input_direction, delta):
 		
 func handle_animation(input_direction):
 	ranged_sprite.scale = Vector2(PlayerValues.ranged_weapon['sprite_scale'], PlayerValues.ranged_weapon['sprite_scale'])
+	special_sprite.scale = Vector2(PlayerValues.special_weapon['sprite_scale'], PlayerValues.special_weapon['sprite_scale'])
+	
 	if GameValues.using_controller == false:
 		ranged.look_at(get_global_mouse_position())
+		special.look_at(get_global_mouse_position())
 	else:
 		ranged.look_at(controller_cursor.global_position)
+		special.look_at(controller_cursor.global_position)
 	
 	if GameValues.using_controller == false:
 		if get_global_mouse_position() > global_position:
 			ranged_sprite.flip_v = false
+			special_sprite.flip_v = false
 		else:
 			ranged_sprite.flip_v = true
+			special_sprite.flip_v = true
 	else:
 		if controller_cursor.global_position > global_position:
 			ranged_sprite.flip_v = false
+			special_sprite.flip_v = false
 		else:
 			ranged_sprite.flip_v = true
+			special_sprite.flip_v = true
 	
 	if input_direction != 0:
 		if input_direction < 0:
@@ -196,6 +198,7 @@ func handle_animation(input_direction):
 					animation_player.seek(current_frame)
 					
 				ranged.position.x *= -1
+				special.position.x *= -1
 			
 		if input_direction > 0:
 			if current_direction == "left":
@@ -211,50 +214,50 @@ func handle_animation(input_direction):
 					animation_player.seek(current_frame)
 					
 				ranged.position.x *= -1
+				special.position.x *= -1
 			
 		animated_sprite_2d.play("run")
 	else:
 		animated_sprite_2d.play("idle")
 		
 	if not is_on_floor():
-			animated_sprite_2d.play("jump")
-			
+		animated_sprite_2d.play("jump")
 
 func handle_attacks():
 	var attack_pressed = false
 	
 	if Input.is_action_just_pressed("set_attack_melee"):
-		current_attack = MELEE
-		PlayerValues.current_attack = "melee"
+		PlayerValues.current_attack = PlayerValues.MELEE
 	elif Input.is_action_just_pressed("set_attack_ranged"):
-		current_attack = RANGED
-		PlayerValues.current_attack = "ranged"
+		PlayerValues.current_attack = PlayerValues.RANGED
 	elif Input.is_action_just_pressed("set_attack_special"):
-		current_attack = SPECIAL
-		PlayerValues.current_attack = "special"
+		PlayerValues.current_attack = PlayerValues.SPECIAL
 		
-	match current_attack:
-		MELEE:
+	match PlayerValues.current_attack:
+		PlayerValues.MELEE:
 			if PlayerValues.melee_weapon_auto_swing == true:
 				attack_pressed = Input.is_action_pressed("attack")
 			else:
 				attack_pressed = Input.is_action_just_pressed("attack")
-		RANGED:
+		PlayerValues.RANGED:
 			if PlayerValues.ranged_weapon_auto_shoot == true:
 				attack_pressed = Input.is_action_pressed("attack")
 			else:
 				attack_pressed = Input.is_action_just_pressed("attack")
-		SPECIAL:
+		PlayerValues.SPECIAL:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == false and PlayerValues.special_weapon['no_shot_delay']:
+				_on_attack_delay_timeout()
+				
 			if PlayerValues.special_weapon_auto_attack == true: 
 				attack_pressed = Input.is_action_pressed("attack")
 			else:
 				attack_pressed = Input.is_action_just_pressed("attack")
 		
-	if Input.is_action_pressed("melee") or (attack_pressed and current_attack == MELEE):
+	if Input.is_action_pressed("melee") or (attack_pressed and PlayerValues.current_attack == PlayerValues.MELEE):
 		attack_melee()
-	if Input.is_action_pressed("ranged") or (attack_pressed and current_attack == RANGED):
+	if Input.is_action_pressed("ranged") or (attack_pressed and PlayerValues.current_attack == PlayerValues.RANGED):
 		attack_ranged()
-	if Input.is_action_pressed("special") or (attack_pressed and current_attack == SPECIAL):
+	if Input.is_action_pressed("special") or (attack_pressed and PlayerValues.current_attack == PlayerValues.SPECIAL):
 		attack_special()
 
 func attack_melee():
@@ -262,13 +265,13 @@ func attack_melee():
 	var melee_sprite_height = melee_sprite.texture.get_height()
 	melee_sprite.offset.y = -melee_sprite_height
 	
-	#set_melee_collision()
+	attack_delay.wait_time = PlayerValues.melee_weapon['attack_delay']
 	
-	melee_attack_delay.wait_time = PlayerValues.melee_weapon['attack_delay']
-	
-	if melee_attack_delay.is_stopped() == true:
+	if attack_delay.is_stopped() == true:
+		ranged_sprite.visible = false
+		special_sprite.visible = false
 		melee_sprite.visible = true
-		melee_attack_delay.start()
+		attack_delay.start()
 		
 		if PlayerValues.melee_weapon['size'] == 0:
 			if melee_sprite_height <= 16.0:
@@ -295,19 +298,15 @@ func attack_melee():
 		else:
 			animation_player.play("melee_attack_left")
 
-func attack_ranged(): 
-	animation_player.stop()
-	%SmallMelee.disabled = true
-	%MediumMelee.disabled = true
-	%LargeMelee.disabled = true
+	
+func attack_ranged():
 	melee_sprite.visible = false
-	
 	ranged_sprite.texture = PlayerValues.ranged_weapon['sprite']
-	ranged_sprite.scale = Vector2(0.5, 0.5)
 	ranged_sprite.visible = true
-	ranged_attack_delay.wait_time = PlayerValues.ranged_weapon['shot_delay']
 	
-	if ranged_attack_delay.is_stopped() == true:
+	attack_delay.wait_time = PlayerValues.ranged_weapon['shot_delay']
+	
+	if attack_delay.is_stopped() == true:
 		if PlayerValues.ranged_weapon['shot_projectiles'] == 1:
 			var projectile = preload("res://Weapons/projectile.tscn").instantiate()
 			projectile.global_position = %ProjectileSpawnLocation.global_position
@@ -327,12 +326,21 @@ func attack_ranged():
 				
 				owner.add_child(projectile)
 				
-		ranged_attack_delay.start()
-				
-	
+		attack_delay.start()
+
 func attack_special():
-	if PlayerValues.special_weapon == PlayerValues.special_weapons['flamethrower']:
-		print("Use flamethrower")
+	if attack_delay.is_stopped():
+		if PlayerValues.special_weapon == PlayerValues.special_weapons['flamethrower']:
+			ranged_sprite.texture = PlayerValues.ranged_weapon['sprite']
+			special_sprite.visible = true
+			
+			var projectile = preload("res://Weapons/projectiles/fire_particles.tscn").instantiate()
+			projectile.global_position = %ProjectileSpawnLocation.global_position
+			
+			if special_projectile_spawn_location.get_children().size() == 0:
+				special_projectile_spawn_location.add_child(projectile)
+				projectile.global_position = special_projectile_spawn_location.global_position
+				print(special_projectile_spawn_location.global_position.distance_to(special.global_position))
 	
 func handle_controller_cursor(delta):
 	var direction = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
@@ -361,16 +369,6 @@ func handle_controller_cursor(delta):
 		
 		if controller_cursor.global_position.distance_to(controller_pivot.global_position) <= 5:
 			controller_cursor_sprite.visible = false
-		
-	
-	#if direction.x == 1:
-	#	controller_pivot.rotation_degrees = 0
-	#if direction.x == -1:
-	#	controller_pivot.rotation_degrees = 180
-	#if direction.y == 1:
-	#	controller_pivot.rotation_degrees = 90
-	#if direction.y == -1:
-	#	controller_pivot.rotation_degrees = 270
 	
 func check_for_cursor_movement():
 	if get_viewport().get_mouse_position() != mouse_position:
@@ -409,17 +407,17 @@ func handle_knockback(knockback_strength, attacker_position):
 func _on_hurtbox_area_entered(area):
 	get_tree().change_scene_to_packed(GameValues.worlds[GameValues.current_world].levels[GameValues.current_level])
 
-
-func _on_melee_attack_delay_timeout():
+func _on_attack_delay_timeout():
 	%SmallMelee.disabled = true
 	%MediumMelee.disabled = true
 	%LargeMelee.disabled = true
 	melee_sprite.visible = false
-
-
-func _on_ranged_attack_delay_timeout():
 	ranged_sprite.visible = false
-
+	special_sprite.visible = false
+	
+	for child in special_projectile_spawn_location.get_children():
+		if child is GPUParticles2D:
+			child.spawn_particles = false
 
 func _on_melee_hitbox_body_entered(body):
 	if body.is_in_group("player") == false:

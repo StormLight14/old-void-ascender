@@ -99,6 +99,8 @@ var weapons = {
 			'base_damage': 5.0,
 			'damage_increment': 5.0,
 			'max_damage': 50.0,
+			'increment_delay': 1,
+			'no_shot_delay': true,
 			'auto_attack': true,
 			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
 			'sprite_scale': 0.4,
