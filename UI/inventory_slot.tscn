@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://brfj8yiutvkb4"]
 
-[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/ranged_weapons/guns/shotgun.png" id="1_77nlj"]
+[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/weapons/ranged_weapons/guns/shotgun.png" id="1_77nlj"]
 [ext_resource type="Texture2D" uid="uid://k7w1fik8hy41" path="res://Assets/UI/inventory_slot.png" id="1_rylg3"]
 [ext_resource type="Script" path="res://UI/inventory_slot.gd" id="2_h1yla"]
 

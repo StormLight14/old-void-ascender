@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgfc518ip1uvc"
-path="res://.godot/imported/stone_sword.png-4cc453fd44efbad01f75c1d1baca5de8.ctex"
+uid="uid://8wyuupka0nyf"
+path="res://.godot/imported/main-tileset.png-6fcc530e8a6b063b27ecd544375cd379.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/melee_weapons/stone_sword.png"
-dest_files=["res://.godot/imported/stone_sword.png-4cc453fd44efbad01f75c1d1baca5de8.ctex"]
+source_file="res://Assets/tiles/main-tileset.png"
+dest_files=["res://.godot/imported/main-tileset.png-6fcc530e8a6b063b27ecd544375cd379.ctex"]
 
 [params]
 

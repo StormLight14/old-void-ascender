@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bljwukluvyb6t"
-path="res://.godot/imported/particle-test.png-0e1d3315f7ec5011039f3c7698277b53.ctex"
+uid="uid://crck2ak7b8kdy"
+path="res://.godot/imported/steel_sword.png-04fb6861314301c92c7333dc415b9694.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/particle-test.png"
-dest_files=["res://.godot/imported/particle-test.png-0e1d3315f7ec5011039f3c7698277b53.ctex"]
+source_file="res://Assets/weapons/melee_weapons/steel_sword.png"
+dest_files=["res://.godot/imported/steel_sword.png-04fb6861314301c92c7333dc415b9694.ctex"]
 
 [params]
 

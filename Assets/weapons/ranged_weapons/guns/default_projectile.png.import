@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6g4egrhbhduy"
-path="res://.godot/imported/ar.png-ca6163897eeb40bdfb56dded7e2d35c6.ctex"
+uid="uid://ys4dl2qsump8"
+path="res://.godot/imported/default_projectile.png-84274733c8c225d87d4b27a4cf285c24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ranged_weapons/guns/ar.png"
-dest_files=["res://.godot/imported/ar.png-ca6163897eeb40bdfb56dded7e2d35c6.ctex"]
+source_file="res://Assets/weapons/ranged_weapons/guns/default_projectile.png"
+dest_files=["res://.godot/imported/default_projectile.png-84274733c8c225d87d4b27a4cf285c24.ctex"]
 
 [params]
 

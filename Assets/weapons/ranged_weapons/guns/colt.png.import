@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crck2ak7b8kdy"
-path="res://.godot/imported/steel_sword.png-ce1bc39b13636acd20d4e3fa145e962c.ctex"
+uid="uid://f7jqkl2gn8t"
+path="res://.godot/imported/colt.png-242c606120452aa6897caa8ff10e6ff6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/melee_weapons/steel_sword.png"
-dest_files=["res://.godot/imported/steel_sword.png-ce1bc39b13636acd20d4e3fa145e962c.ctex"]
+source_file="res://Assets/weapons/ranged_weapons/guns/colt.png"
+dest_files=["res://.godot/imported/colt.png-242c606120452aa6897caa8ff10e6ff6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cprxtn2x1iob8"
-path="res://.godot/imported/tiles.png-59bbddeac388e18d39eea8041947fc8b.ctex"
+uid="uid://uu4jicg1s21g"
+path="res://.godot/imported/ice_sword.png-1b0b4a15f3aebcf0b28aeb7b2561fa51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tiles/tiles.png"
-dest_files=["res://.godot/imported/tiles.png-59bbddeac388e18d39eea8041947fc8b.ctex"]
+source_file="res://Assets/weapons/melee_weapons/ice_sword.png"
+dest_files=["res://.godot/imported/ice_sword.png-1b0b4a15f3aebcf0b28aeb7b2561fa51.ctex"]
 
 [params]
 

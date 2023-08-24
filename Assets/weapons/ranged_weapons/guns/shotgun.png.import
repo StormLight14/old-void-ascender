@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtyl7cqcslbul"
-path="res://.godot/imported/cavesofgallet.png-0f8f370be7410c9fef28c2c60d87aa1d.ctex"
+uid="uid://bl1dj1l3hqkqd"
+path="res://.godot/imported/shotgun.png-c6e09a53aeb5d17977e044a21535937e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tiles/cavesofgallet.png"
-dest_files=["res://.godot/imported/cavesofgallet.png-0f8f370be7410c9fef28c2c60d87aa1d.ctex"]
+source_file="res://Assets/weapons/ranged_weapons/guns/shotgun.png"
+dest_files=["res://.godot/imported/shotgun.png-c6e09a53aeb5d17977e044a21535937e.ctex"]
 
 [params]
 

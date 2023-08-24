@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxvkcjora8oqw"
-path="res://.godot/imported/jungle-tileset.png-ceafed463931a3f8ab575565373962e8.ctex"
+uid="uid://borshcju0jowj"
+path="res://.godot/imported/dark_sword.png-7b0f76a17c58d42a83869c6e3d669f44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tiles/jungle-tileset.png"
-dest_files=["res://.godot/imported/jungle-tileset.png-ceafed463931a3f8ab575565373962e8.ctex"]
+source_file="res://Assets/weapons/melee_weapons/dark_sword.png"
+dest_files=["res://.godot/imported/dark_sword.png-7b0f76a17c58d42a83869c6e3d669f44.ctex"]
 
 [params]
 

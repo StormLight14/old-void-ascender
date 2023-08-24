@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f7jqkl2gn8t"
-path="res://.godot/imported/colt.png-1bd94df4607f84c165449b77e64cc299.ctex"
+uid="uid://vybwd7qckh5"
+path="res://.godot/imported/vampire_sword.png-b4fe250a6b4b6122468a075b32bbc36e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ranged_weapons/guns/colt.png"
-dest_files=["res://.godot/imported/colt.png-1bd94df4607f84c165449b77e64cc299.ctex"]
+source_file="res://Assets/weapons/melee_weapons/vampire_sword.png"
+dest_files=["res://.godot/imported/vampire_sword.png-b4fe250a6b4b6122468a075b32bbc36e.ctex"]
 
 [params]
 

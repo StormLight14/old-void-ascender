@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dju1aiqwesm24"]
 
 [ext_resource type="Script" path="res://UI/inventory.gd" id="1_s4wqq"]
-[ext_resource type="Texture2D" uid="uid://crck2ak7b8kdy" path="res://Assets/melee_weapons/steel_sword.png" id="2_1mro0"]
 [ext_resource type="PackedScene" uid="uid://brfj8yiutvkb4" path="res://UI/inventory_slot.tscn" id="2_14xjd"]
-[ext_resource type="Texture2D" uid="uid://b6g4egrhbhduy" path="res://Assets/ranged_weapons/guns/ar.png" id="3_ydprc"]
-[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/ranged_weapons/guns/shotgun.png" id="4_7hxkv"]
+[ext_resource type="Texture2D" uid="uid://crck2ak7b8kdy" path="res://Assets/weapons/melee_weapons/steel_sword.png" id="3_5ft8u"]
+[ext_resource type="Texture2D" uid="uid://b6g4egrhbhduy" path="res://Assets/weapons/ranged_weapons/guns/ar.png" id="4_5cr3o"]
+[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/weapons/ranged_weapons/guns/shotgun.png" id="5_7ykbs"]
 
 [node name="Inventory" type="Control"]
 process_mode = 3
@@ -108,21 +108,21 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("2_1mro0")
+texture = ExtResource("3_5ft8u")
 stretch_mode = 5
 
 [node name="EquippedRanged" type="TextureRect" parent="EquippedHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("3_ydprc")
+texture = ExtResource("4_5cr3o")
 stretch_mode = 5
 
 [node name="EquippedSpecial" type="TextureRect" parent="EquippedHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("4_7hxkv")
+texture = ExtResource("5_7ykbs")
 stretch_mode = 5
 
 [connection signal="pressed" from="ButtonsHBox/WeaponsButton" to="." method="_on_weapons_button_pressed"]

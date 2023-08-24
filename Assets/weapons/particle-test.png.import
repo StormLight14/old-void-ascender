@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ys4dl2qsump8"
-path="res://.godot/imported/default_projectile.png-82261951a7c673974a84648590191775.ctex"
+uid="uid://bljwukluvyb6t"
+path="res://.godot/imported/particle-test.png-9be3facb9028dc795586a6036cf38aaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ranged_weapons/guns/default_projectile.png"
-dest_files=["res://.godot/imported/default_projectile.png-82261951a7c673974a84648590191775.ctex"]
+source_file="res://Assets/weapons/particle-test.png"
+dest_files=["res://.godot/imported/particle-test.png-9be3facb9028dc795586a6036cf38aaf.ctex"]
 
 [params]
 

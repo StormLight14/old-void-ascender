@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://l84xtunrs365" path="res://Assets/placeholder/Meow-Knight_Run.png" id="5_35fhk"]
 [ext_resource type="Texture2D" uid="uid://bevndgeduhftm" path="res://Assets/player/ase/player_idle.png" id="5_mk76x"]
 [ext_resource type="Texture2D" uid="uid://l58a7dlb2lt6" path="res://Assets/player/ase/player_run.png" id="6_aew5q"]
-[ext_resource type="Texture2D" uid="uid://bgfc518ip1uvc" path="res://Assets/melee_weapons/stone_sword.png" id="6_p0oij"]
-[ext_resource type="Texture2D" uid="uid://f7jqkl2gn8t" path="res://Assets/ranged_weapons/guns/colt.png" id="7_jhh2y"]
 [ext_resource type="Script" path="res://Player/melee_hitbox.gd" id="7_rrfgy"]
+[ext_resource type="Texture2D" uid="uid://bgfc518ip1uvc" path="res://Assets/weapons/melee_weapons/stone_sword.png" id="9_7m3an"]
 [ext_resource type="Texture2D" uid="uid://cakrnqhfo6nvh" path="res://Assets/UI/controller_cursor.png" id="9_82nw3"]
-[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/ranged_weapons/guns/shotgun.png" id="10_nmbw7"]
+[ext_resource type="Texture2D" uid="uid://f7jqkl2gn8t" path="res://Assets/weapons/ranged_weapons/guns/colt.png" id="11_urr3i"]
+[ext_resource type="Texture2D" uid="uid://bl1dj1l3hqkqd" path="res://Assets/weapons/ranged_weapons/guns/shotgun.png" id="12_3lps6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i03kn"]
 atlas = ExtResource("3_mnend")
@@ -262,7 +262,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(3, -5)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("6_p0oij")
+texture = ExtResource("9_7m3an")
 centered = false
 offset = Vector2(0, -16)
 
@@ -304,7 +304,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(9, 0)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("7_jhh2y")
+texture = ExtResource("11_urr3i")
 
 [node name="ProjectileSpawnLocation" type="Marker2D" parent="Ranged"]
 unique_name_in_owner = true
@@ -317,7 +317,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(10, 2.98023e-08)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("10_nmbw7")
+texture = ExtResource("12_3lps6")
 
 [node name="SpecialProjectileSpawnLocation" type="Marker2D" parent="Special"]
 unique_name_in_owner = true
