@@ -9,7 +9,7 @@ var weapons = {
 			'attack_delay': 0.4, # delay in seconds between attacks
 			'auto_swing': false,
 			'knockback_strength': 50,
-			'sprite': preload("res://Assets/melee_weapons/stone_sword.png"),
+			'sprite': preload("res://Assets/weapons/melee_weapons/stone_sword.png"),
 		},
 		'steel_sword': {
 			'name': 'Steel Sword',
@@ -18,7 +18,7 @@ var weapons = {
 			'attack_delay': 0.45,
 			'auto_swing': false,
 			'knockback_strength': 50,
-			'sprite': preload("res://Assets/melee_weapons/steel_sword.png"),
+			'sprite': preload("res://Assets/weapons/melee_weapons/steel_sword.png"),
 		},
 		'vampire_sword': {
 			'name': 'Vampire Sword',
@@ -27,7 +27,7 @@ var weapons = {
 			'attack_delay': 0.1,
 			'auto_swing': true,
 			'knockback_strength': 60,
-			'sprite': preload("res://Assets/melee_weapons/vampire_sword.png"),
+			'sprite': preload("res://Assets/weapons/melee_weapons/vampire_sword.png"),
 		},
 		'ice_sword': {
 			'name': 'Ice Sword',
@@ -36,7 +36,7 @@ var weapons = {
 			'attack_delay': 0.3,
 			'auto_swing': true,
 			'knockback_strength': 60,
-			'sprite': preload("res://Assets/melee_weapons/ice_sword.png"),
+			'sprite': preload("res://Assets/weapons/melee_weapons/ice_sword.png"),
 		},
 		'dark_sword': {
 			'name': 'Dark Sword',
@@ -45,7 +45,7 @@ var weapons = {
 			'attack_delay': 0.5,
 			'auto_swing': true,
 			'knockback_strength': 80,
-			'sprite': preload("res://Assets/melee_weapons/dark_sword.png"),
+			'sprite': preload("res://Assets/weapons/melee_weapons/dark_sword.png"),
 		}
 	},
 	'ranged': { # ranged
@@ -60,7 +60,7 @@ var weapons = {
 			'projectile_damage': 10.0, # per projectile
 			'projectile_knockback_strength': 30,
 			'auto_shoot': true,
-			'sprite': preload("res://Assets/ranged_weapons/guns/colt.png"),
+			'sprite': preload("res://Assets/weapons/ranged_weapons/guns/colt.png"),
 			'sprite_scale': 0.3,
 		},
 		'ar': {
@@ -74,7 +74,7 @@ var weapons = {
 			'projectile_damage': 15.0, # per projectile
 			'projectile_knockback_strength': 30,
 			'auto_shoot': true,
-			'sprite': preload("res://Assets/ranged_weapons/guns/ar.png"),
+			'sprite': preload("res://Assets/weapons/ranged_weapons/guns/ar.png"),
 			'sprite_scale': 0.4,
 		},
 		'shotgun': {
@@ -89,7 +89,7 @@ var weapons = {
 			'projectile_damage': 10.0, # per projectile
 			'projectile_knockback_strength': 50,
 			'auto_shoot': true,
-			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
+			'sprite': preload("res://Assets/weapons/ranged_weapons/guns/shotgun.png"),
 			'sprite_scale': 0.4,
 		}
 	},
@@ -102,7 +102,7 @@ var weapons = {
 			'increment_delay': 1,
 			'no_shot_delay': true,
 			'auto_attack': true,
-			'sprite': preload("res://Assets/ranged_weapons/guns/shotgun.png"),
+			'sprite': preload("res://Assets/weapons/ranged_weapons/guns/shotgun.png"),
 			'sprite_scale': 0.4,
 		}
 	}
