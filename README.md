@@ -13,6 +13,7 @@ The player must go upwards through each level to complete it. They need to get t
 - [x] Inventory system
 - [x] Level system, although obscure right now
 - [x] Stab stab and pew pew (Melee and ranged weapons)
+- [x] Basic enemy following
 
 ## Contributing
 Feel free to make pull requests to improve any code I've written!
