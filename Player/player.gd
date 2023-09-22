@@ -29,6 +29,8 @@ extends CharacterBody2D
 
 @export var player_stats = PlayerStats
 
+var canvas_layer: CanvasLayer
+
 var health = PlayerValues.health
 var knockback_vector = Vector2.ZERO
 
@@ -47,11 +49,16 @@ var previous_wall_normal = Vector2.ZERO
 var air_jumps = 0 
 
 func _ready():
+	GameValues.ui_open = false
+	
 	randomize()
 	melee_sprite.visible = false
 	ranged_sprite.visible = false
 	special_sprite.visible = false
 	air_jumps = player_stats.air_jumps
+	
+	canvas_layer = CanvasLayer.new()
+	get_node("/root/").add_child(canvas_layer)
 
 func _physics_process(delta):
 	var input_direction = Input.get_axis("left", "right")
@@ -135,13 +142,18 @@ func handle_jump(input_direction):
 			air_jumps -= 1
 
 func handle_ui_controls():
-	if Input.is_action_pressed("open_inventory") and open_ui_timer.is_stopped():
-		var canvas_layer = CanvasLayer.new()
-		get_node("/root/").add_child(canvas_layer)
-		
-		var inventory = preload("res://UI/inventory.tscn")
-		canvas_layer.add_child(inventory.instantiate())
-		get_tree().paused = true
+	if GameValues.ui_open == false:
+		if Input.is_action_pressed("open_inventory") and open_ui_timer.is_stopped():
+			var inventory = preload("res://UI/inventory.tscn")
+			canvas_layer.add_child(inventory.instantiate())
+			GameValues.ui_open = true
+			get_tree().paused = true
+			
+		if Input.is_action_just_pressed("pause"):
+			var pause_menu = preload("res://UI/pause_menu.tscn")
+			canvas_layer.add_child(pause_menu.instantiate())
+			GameValues.ui_open = true
+			get_tree().paused = true
 
 func handle_movement(input_direction, delta):
 	if input_direction != 0 and is_on_floor():
@@ -352,7 +364,7 @@ func handle_controller_cursor(delta):
 		controller_cursor_sprite.visible = true
 		controller_cursor_to += direction * 600.0 * delta
 
-		# Calculate the direction from the center to the cursor
+		# Calculate the direction from the center to i cursor
 		var direction_from_center = controller_cursor_to - controller_pivot.global_position
 		var distance = direction_from_center.length()
 

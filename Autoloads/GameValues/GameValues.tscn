@@ -5,5 +5,6 @@
 [ext_resource type="Resource" uid="uid://b5kgaolblxg5g" path="res://Worlds/world_one/world_one_data.tres" id="3_s0hax"]
 
 [node name="GameValues" type="Node"]
+process_mode = 3
 script = ExtResource("1_1k4ik")
 worlds = Array[Resource]([ExtResource("2_f8qpb"), ExtResource("3_s0hax")])

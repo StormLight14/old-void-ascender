@@ -7,6 +7,8 @@ extends Control
 
 func _ready():
 	print(OS.get_user_data_dir())
+	GameValues.ui_open = true
+	
 	start_button.grab_focus()
 	if FileAccess.file_exists("user://saves/GameData.tres"):
 		GameValues.load_game_values()

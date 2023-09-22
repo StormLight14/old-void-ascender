@@ -4,6 +4,8 @@ var weapons = {
 	'melee': { # melee
 		'stone_sword': { # melee weapon id
 			'name': 'Stone Sword',
+			'max_level': 10,
+			'base_upgrade_cost': 15.0,
 			'size': 0, # 0: small, 1: medium, 2: large
 			'damage': 5.0,
 			'attack_delay': 0.4, # delay in seconds between attacks
@@ -13,6 +15,8 @@ var weapons = {
 		},
 		'steel_sword': {
 			'name': 'Steel Sword',
+			'max_level': 10,
+			'base_upgrade_cost': 17.5,
 			'size': 0,
 			'damage': 7.5,
 			'attack_delay': 0.45,
@@ -22,6 +26,8 @@ var weapons = {
 		},
 		'vampire_sword': {
 			'name': 'Vampire Sword',
+			'max_level': 10,
+			'base_upgrade_cost': 45.0,
 			'size': 0,
 			'damage': 25.0,
 			'attack_delay': 0.1,
@@ -31,6 +37,8 @@ var weapons = {
 		},
 		'ice_sword': {
 			'name': 'Ice Sword',
+			'max_level': 10,
+			'base_upgrade_cost': 45.0,
 			'size': 1,
 			'damage': 50.0,
 			'attack_delay': 0.3,
@@ -40,6 +48,8 @@ var weapons = {
 		},
 		'dark_sword': {
 			'name': 'Dark Sword',
+			'max_level': 10,
+			'base_upgrade_cost': 60.0,
 			'size': 2,
 			'damage': 100.0,
 			'attack_delay': 0.5,
@@ -52,6 +62,8 @@ var weapons = {
 		'colt': { # ranged weapon id
 			'name': 'Colt',
 			'type': 'gun',
+			'max_level': 10,
+			'base_upgrade_cost': 60.0,
 			'shot_projectiles': 1,
 			'ammo_count': 16,
 			'reload_time': 1,
@@ -66,6 +78,8 @@ var weapons = {
 		'ar': {
 			'name': 'AR',
 			'type': 'gun',
+			'max_level': 10,
+			'base_upgrade_cost': 60.0,
 			'shot_projectiles': 1,
 			'ammo_count': 30,
 			'reload_time': 1,
@@ -80,6 +94,8 @@ var weapons = {
 		'shotgun': {
 			'name': 'Shotgun',
 			'type': 'gun',
+			'max_level': 10,
+			'base_upgrade_cost': 60.0,
 			'shot_projectiles': 5,
 			'spread_degrees': 10,
 			'ammo_count': 30,
@@ -96,6 +112,8 @@ var weapons = {
 	'special': { # special
 		'flamethrower': {
 			'name': 'Flamethrower',
+			'max_level': 10,
+			'base_upgrade_cost': 60.0,
 			'base_damage': 5.0,
 			'damage_increment': 5.0,
 			'max_damage': 50.0,

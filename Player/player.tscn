@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_dvbl3"]
 [ext_resource type="Resource" uid="uid://l0ktuc2h8uud" path="res://Player/DefaultPlayerStats.tres" id="2_ygpc7"]
-[ext_resource type="Texture2D" uid="uid://c3kirh8usfao5" path="res://Assets/player/player_idle.png" id="3_mnend"]
+[ext_resource type="Texture2D" uid="uid://dvk2svytnx5jn" path="res://Assets/player/player_idle.png" id="3_mnend"]
 [ext_resource type="Texture2D" uid="uid://bjnnvo4wnc4hf" path="res://Assets/placeholder/Meow-Knight_Idle.png" id="3_obtjq"]
 [ext_resource type="Texture2D" uid="uid://dhsnm4blqinok" path="res://Assets/placeholder/Meow-Knight_Fall.png" id="4_6ra8m"]
 [ext_resource type="Texture2D" uid="uid://l84xtunrs365" path="res://Assets/placeholder/Meow-Knight_Run.png" id="5_35fhk"]
