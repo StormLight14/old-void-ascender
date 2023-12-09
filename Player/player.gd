@@ -147,13 +147,11 @@ func handle_ui_controls():
 			var inventory = preload("res://UI/inventory.tscn")
 			canvas_layer.add_child(inventory.instantiate())
 			GameValues.ui_open = true
-			get_tree().paused = true
 			
 		if Input.is_action_just_pressed("pause"):
 			var pause_menu = preload("res://UI/pause_menu.tscn")
 			canvas_layer.add_child(pause_menu.instantiate())
 			GameValues.ui_open = true
-			get_tree().paused = true
 
 func handle_movement(input_direction, delta):
 	if input_direction != 0 and is_on_floor():

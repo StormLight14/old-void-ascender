@@ -15,7 +15,6 @@ var ui_open = true
 @export var worlds: Array[Resource] = []
 
 func _process(_delta):
-	print(ui_open)
 	if Input.is_action_just_pressed("save"):
 		save_game_values()
 		save_profile(GameValues.current_profile, PlayerValues)

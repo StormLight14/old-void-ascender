@@ -651,16 +651,12 @@ position = Vector2(88, 32)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_0sgbm")
-cell_quadrant_size = 8
+rendering_quadrant_size = 8
 format = 2
 layer_0/name = "Base"
 layer_0/tile_data = PackedInt32Array(262148, 262147, 6)
 layer_1/name = "Slopes"
-layer_1/enabled = true
 layer_1/modulate = Color(0.52549, 0.992157, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("1_7s8c0")]

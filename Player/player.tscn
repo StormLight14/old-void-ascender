@@ -231,6 +231,7 @@ radius = 4.0
 height = 18.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+process_mode = 3
 collision_layer = 768
 script = ExtResource("1_dvbl3")
 player_stats = ExtResource("2_ygpc7")

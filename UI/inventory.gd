@@ -26,6 +26,7 @@ enum {
 var current_tab = WEAPONS
 
 func _ready():
+	get_tree().paused = true
 	update_inventory_ui()
 	for melee_weapon_id in PlayerValues.inventory.melee_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
