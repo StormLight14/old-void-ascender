@@ -31,7 +31,7 @@ extends CharacterBody2D
 
 var canvas_layer: CanvasLayer
 
-var health = PlayerValues.health
+var health = PlayerValues.player_data.health
 var knockback_vector = Vector2.ZERO
 
 @onready var mouse_position = get_viewport().get_mouse_position()
@@ -62,7 +62,7 @@ func _ready():
 
 func _physics_process(delta):
 	var input_direction = Input.get_axis("left", "right")
-	PlayerValues.position = global_position
+	PlayerValues.player_data.position = global_position
 	
 	handle_gravity(delta)
 	handle_wall_jump()
@@ -76,21 +76,21 @@ func _physics_process(delta):
 	handle_friction(input_direction, delta)
 	handle_air_resistance(input_direction, delta)
 	
-	if PlayerValues.current_attack == PlayerValues.MELEE:
+	if PlayerValues.player_data.current_attack == PlayerValues.MELEE:
 		if Input.is_key_pressed(KEY_H):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons['steel_sword']
+			PlayerValues.player_data.melee_weapon = PlayerValues.melee_weapons['steel_sword']
 		if Input.is_key_pressed(KEY_J):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons['ice_sword']
+			PlayerValues.player_data.melee_weapon = PlayerValues.melee_weapons['ice_sword']
 		if Input.is_key_pressed(KEY_K):
-			PlayerValues.melee_weapon = PlayerValues.melee_weapons['vampire_sword']
+			PlayerValues.player_data.melee_weapon = PlayerValues.melee_weapons['vampire_sword']
 		
-	if PlayerValues.current_attack == PlayerValues.RANGED:
+	if PlayerValues.player_data.current_attack == PlayerValues.RANGED:
 		if Input.is_key_pressed(KEY_H):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['colt']
+			PlayerValues.player_data.ranged_weapon = PlayerValues.ranged_weapons['colt']
 		if Input.is_key_pressed(KEY_J):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['shotgun']
+			PlayerValues.player_data.ranged_weapon = PlayerValues.ranged_weapons['shotgun']
 		if Input.is_key_pressed(KEY_K):
-			PlayerValues.ranged_weapon = PlayerValues.ranged_weapons['ar']
+			PlayerValues.player_data.ranged_weapon = PlayerValues.ranged_weapons['ar']
 			
 
 	var was_on_floor = is_on_floor()
@@ -168,8 +168,8 @@ func handle_air_resistance(input_direction, delta):
 		velocity.x = move_toward(velocity.x, 0, player_stats.air_resistance * delta)
 		
 func handle_animation(input_direction):
-	ranged_sprite.scale = Vector2(PlayerValues.ranged_weapon['sprite_scale'], PlayerValues.ranged_weapon['sprite_scale'])
-	special_sprite.scale = Vector2(PlayerValues.special_weapon['sprite_scale'], PlayerValues.special_weapon['sprite_scale'])
+	ranged_sprite.scale = Vector2(PlayerValues.player_data.ranged_weapon['sprite_scale'], PlayerValues.player_data.ranged_weapon['sprite_scale'])
+	special_sprite.scale = Vector2(PlayerValues.player_data.special_weapon['sprite_scale'], PlayerValues.player_data.special_weapon['sprite_scale'])
 	
 	if GameValues.using_controller == false:
 		ranged.look_at(get_global_mouse_position())
@@ -237,13 +237,13 @@ func handle_attacks():
 	var attack_pressed = false
 	
 	if Input.is_action_just_pressed("set_attack_melee"):
-		PlayerValues.current_attack = PlayerValues.MELEE
+		PlayerValues.player_data.current_attack = PlayerValues.MELEE
 	elif Input.is_action_just_pressed("set_attack_ranged"):
-		PlayerValues.current_attack = PlayerValues.RANGED
+		PlayerValues.player_data.current_attack = PlayerValues.RANGED
 	elif Input.is_action_just_pressed("set_attack_special"):
-		PlayerValues.current_attack = PlayerValues.SPECIAL
+		PlayerValues.player_data.current_attack = PlayerValues.SPECIAL
 		
-	match PlayerValues.current_attack:
+	match PlayerValues.player_data.current_attack:
 		PlayerValues.MELEE:
 			if PlayerValues.melee_weapon_auto_swing == true:
 				attack_pressed = Input.is_action_pressed("attack")
@@ -255,7 +255,7 @@ func handle_attacks():
 			else:
 				attack_pressed = Input.is_action_just_pressed("attack")
 		PlayerValues.SPECIAL:
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == false and PlayerValues.special_weapon['no_shot_delay']:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == false and PlayerValues.player_data.special_weapon['no_shot_delay']:
 				_on_attack_delay_timeout()
 				
 			if PlayerValues.special_weapon_auto_attack == true: 
@@ -263,11 +263,11 @@ func handle_attacks():
 			else:
 				attack_pressed = Input.is_action_just_pressed("attack")
 		
-	if Input.is_action_pressed("melee") or (attack_pressed and PlayerValues.current_attack == PlayerValues.MELEE):
+	if Input.is_action_pressed("melee") or (attack_pressed and PlayerValues.player_data.current_attack == PlayerValues.MELEE):
 		attack_melee()
-	if Input.is_action_pressed("ranged") or (attack_pressed and PlayerValues.current_attack == PlayerValues.RANGED):
+	if Input.is_action_pressed("ranged") or (attack_pressed and PlayerValues.player_data.current_attack == PlayerValues.RANGED):
 		attack_ranged()
-	if Input.is_action_pressed("special") or (attack_pressed and PlayerValues.current_attack == PlayerValues.SPECIAL):
+	if Input.is_action_pressed("special") or (attack_pressed and PlayerValues.player_data.current_attack == PlayerValues.SPECIAL):
 		attack_special()
 
 func attack_melee():
@@ -275,7 +275,7 @@ func attack_melee():
 	var melee_sprite_height = melee_sprite.texture.get_height()
 	melee_sprite.offset.y = -melee_sprite_height
 	
-	attack_delay.wait_time = PlayerValues.melee_weapon['attack_delay']
+	attack_delay.wait_time = PlayerValues.player_data.melee_weapon['attack_delay']
 	
 	if attack_delay.is_stopped() == true:
 		ranged_sprite.visible = false
@@ -283,26 +283,26 @@ func attack_melee():
 		melee_sprite.visible = true
 		attack_delay.start()
 		
-		if PlayerValues.melee_weapon['size'] == 0:
+		if PlayerValues.player_data.melee_weapon['size'] == 0:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(0.6, 0.6)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.3, 0.3)
 			%SmallMelee.disabled = false
-		elif PlayerValues.melee_weapon['size'] == 1:
+		elif PlayerValues.player_data.melee_weapon['size'] == 1:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(0.8, 0.8)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.4, 0.4)
 			%MediumMelee.disabled = false
-		elif PlayerValues.melee_weapon['size'] == 2:
+		elif PlayerValues.player_data.melee_weapon['size'] == 2:
 			if melee_sprite_height <= 16.0:
 				melee_sprite.scale = Vector2(1.0, 1.0)
 			elif melee_sprite_height <= 32.0:
 				melee_sprite.scale = Vector2(0.5, 0.5)
 			%LargeMelee.disabled = false
 			
-		animation_player.speed_scale = 1 + 1/PlayerValues.melee_weapon['attack_delay'] # Original animation time 1 sec
+		animation_player.speed_scale = 1 + 1/PlayerValues.player_data.melee_weapon['attack_delay'] # Original animation time 1 sec
 		if current_direction == "right":
 			animation_player.play("melee_attack_right")
 		else:
@@ -311,27 +311,27 @@ func attack_melee():
 	
 func attack_ranged():
 	melee_sprite.visible = false
-	ranged_sprite.texture = PlayerValues.ranged_weapon['sprite']
+	ranged_sprite.texture = PlayerValues.player_data.ranged_weapon['sprite']
 	ranged_sprite.visible = true
 	
-	attack_delay.wait_time = PlayerValues.ranged_weapon['shot_delay']
+	attack_delay.wait_time = PlayerValues.player_data.ranged_weapon['shot_delay']
 	
 	if attack_delay.is_stopped() == true:
-		if PlayerValues.ranged_weapon['shot_projectiles'] == 1:
+		if PlayerValues.player_data.ranged_weapon['shot_projectiles'] == 1:
 			var projectile = preload("res://Weapons/projectile.tscn").instantiate()
 			projectile.global_position = %ProjectileSpawnLocation.global_position
 			projectile.rotation = ranged.rotation
-			projectile.speed = PlayerValues.ranged_weapon['projectile_speed']
+			projectile.speed = PlayerValues.player_data.ranged_weapon['projectile_speed']
 			projectile.start_pos = global_position
 			
 			owner.add_child(projectile)
 		else:
-			var spread_degrees = PlayerValues.ranged_weapon['spread_degrees']
-			for i in range(PlayerValues.ranged_weapon['shot_projectiles']):
+			var spread_degrees = PlayerValues.player_data.ranged_weapon['spread_degrees']
+			for i in range(PlayerValues.player_data.ranged_weapon['shot_projectiles']):
 				var projectile = preload("res://Weapons/projectile.tscn").instantiate()
 				projectile.global_position = %ProjectileSpawnLocation.global_position
 				projectile.rotation_degrees = ranged.rotation_degrees + randf_range(-spread_degrees, spread_degrees)
-				projectile.speed = PlayerValues.ranged_weapon['projectile_speed']
+				projectile.speed = PlayerValues.player_data.ranged_weapon['projectile_speed']
 				projectile.start_pos = global_position
 				
 				owner.add_child(projectile)
@@ -340,8 +340,8 @@ func attack_ranged():
 
 func attack_special():
 	if attack_delay.is_stopped():
-		if PlayerValues.special_weapon == PlayerValues.special_weapons['flamethrower']:
-			ranged_sprite.texture = PlayerValues.ranged_weapon['sprite']
+		if PlayerValues.player_data.special_weapon == PlayerValues.special_weapons['flamethrower']:
+			ranged_sprite.texture = PlayerValues.player_data.ranged_weapon['sprite']
 			special_sprite.visible = true
 			
 			var projectile = preload("res://Weapons/projectiles/fire_particles.tscn").instantiate()

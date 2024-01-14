@@ -78,13 +78,13 @@ func handle_friction(delta):
 func handle_movement(delta):		
 	if is_on_floor():
 		if leave_player_timer.is_stopped() == true:
-			if global_position.distance_to(PlayerValues.position) <= sight_range:
+			if global_position.distance_to(PlayerValues.player_data.position) <= sight_range:
 				current_state = CHASING
 			
 		if fall_check_left.is_colliding() == false:
 			current_direction = "right"
 			
-			if PlayerValues.position.x < global_position.x:
+			if PlayerValues.player_data.position.x < global_position.x:
 				current_state = WANDERING
 				leave_player_timer.start()
 				velocity.x = 0
@@ -92,7 +92,7 @@ func handle_movement(delta):
 		elif fall_check_right.is_colliding() == false:
 			current_direction = "left"
 			
-			if PlayerValues.position.x > global_position.x:
+			if PlayerValues.player_data.position.x > global_position.x:
 				current_state = WANDERING
 				leave_player_timer.start()
 				velocity.x = 0
@@ -104,7 +104,7 @@ func handle_movement(delta):
 				if current_direction == "left":
 					velocity.x = move_toward(velocity.x, -max_speed, acceleration * delta)
 			CHASING:
-				velocity.x = move_toward(velocity.x, global_position.direction_to(PlayerValues.position).x * max_speed, acceleration * delta)
+				velocity.x = move_toward(velocity.x, global_position.direction_to(PlayerValues.player_data.position).x * max_speed, acceleration * delta)
 
 
 func _on_enemy_hitbox_body_entered(body):
