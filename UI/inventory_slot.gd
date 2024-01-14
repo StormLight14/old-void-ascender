@@ -19,14 +19,14 @@ func _process(_delta):
 func _on_item_texture_button_pressed():
 	match slot_item_type:
 		'melee':
-			PlayerValues.melee_weapon = slot_item
-			PlayerValues.current_attack = PlayerValues.MELEE
+			PlayerValues.player_data.melee_weapon = slot_item
+			PlayerValues.player_data.current_attack = PlayerValues.MELEE
 		'ranged':
-			PlayerValues.ranged_weapon = slot_item
-			PlayerValues.current_attack = PlayerValues.RANGED
+			PlayerValues.player_data.ranged_weapon = slot_item
+			PlayerValues.player_data.current_attack = PlayerValues.RANGED
 		'special':
-			PlayerValues.special_weapon = slot_item
-			PlayerValues.current_attack = PlayerValues.SPECIAL
+			PlayerValues.player_data.special_weapon = slot_item
+			PlayerValues.player_data.current_attack = PlayerValues.SPECIAL
 		'empty':
 			return
 	

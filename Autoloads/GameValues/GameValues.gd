@@ -97,19 +97,13 @@ func load_profile(profile):
 	
 	if load_profile:
 		current_profile = profile
-		PlayerValues.position = load_profile.player_data.position
-		PlayerValues.health = load_profile.player_data.health
-		PlayerValues.strength = load_profile.player_data.strength # multiplier * damage of weapon
+		PlayerValues.player_data.position = load_profile.player_data.position
+		PlayerValues.player_data.health = load_profile.player_data.health
+		PlayerValues.player_data.strength = load_profile.player_data.strength # multiplier * damage of weapon
 		
-		PlayerValues.current_attack = load_profile.player_data.current_attack
-
-		PlayerValues.melee_weapon = load_profile.player_data.melee_weapon # by melee weapon id, found in WeaponStats.gd
-		PlayerValues.melee_weapon_sprite = load_profile.player_data.melee_weapon_sprite
-		PlayerValues.melee_weapon_auto_swing = load_profile.player_data.melee_weapon_auto_swing
-
-		PlayerValues.ranged_weapon = load_profile.player_data.ranged_weapon 
-		PlayerValues.ranged_weapon_sprite = load_profile.player_data.ranged_weapon_sprite
-		PlayerValues.ranged_weapon_auto_shoot = load_profile.player_data.ranged_weapon_auto_shoot
+		PlayerValues.player_data.current_attack = load_profile.player_data.current_attack
+		PlayerValues.player_data.melee_weapon = load_profile.player_data.melee_weapon # by melee weapon id, found in WeaponStats.gd
+		PlayerValues.player_data.ranged_weapon = load_profile.player_data.ranged_weapon 
 		
 		get_tree().change_scene_to_packed(GameValues.worlds[load_profile.world].levels[load_profile.level])
 	
@@ -117,4 +111,4 @@ func load_profile(profile):
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_game_values()
-		save_profile(GameValues.current_profile, PlayerValues)
+		save_profile(GameValues.current_profile, PlayerValues.player_data)

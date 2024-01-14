@@ -28,19 +28,19 @@ var current_tab = WEAPONS
 func _ready():
 	get_tree().paused = true
 	update_inventory_ui()
-	for melee_weapon_id in PlayerValues.inventory.melee_weapons:
+	for melee_weapon_id in PlayerValues.player_data.inventory.melee_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
 		inventory_slot.slot_item_type = 'melee'
 		inventory_slot.slot_item = WeaponStats.weapons['melee'][melee_weapon_id]
 		melee_weapons.add_child(inventory_slot)
 
-	for ranged_weapon_id in PlayerValues.inventory.ranged_weapons:
+	for ranged_weapon_id in PlayerValues.player_data.inventory.ranged_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
 		inventory_slot.slot_item_type = 'ranged'
 		inventory_slot.slot_item = WeaponStats.weapons['ranged'][ranged_weapon_id]
 		ranged_weapons.add_child(inventory_slot)
 		
-	for special_weapon_id in PlayerValues.inventory.special_weapons:
+	for special_weapon_id in PlayerValues.player_data.inventory.special_weapons:
 		var inventory_slot = inventory_slot_scene.instantiate()
 		inventory_slot.slot_item_type = 'special'
 		inventory_slot.slot_item = WeaponStats.weapons['special'][special_weapon_id]
@@ -69,8 +69,8 @@ func update_inventory_ui():
 			perks_scroll.visible = true
 			set_equipped_display_visible('special')
 			
-	equipped_melee.texture = PlayerValues.melee_weapon['sprite']
-	equipped_ranged.texture = PlayerValues.ranged_weapon['sprite']
+	equipped_melee.texture = PlayerValues.player_data.melee_weapon['sprite']
+	equipped_ranged.texture = PlayerValues.player_data.ranged_weapon['sprite']
 	#equipped_special.texture =  PlayerValues.special_weapon['sprite']
 	
 func handle_controls():
